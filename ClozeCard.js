@@ -1,6 +1,10 @@
 var BasicCard = require("./BasicCard.js");
 var inquire = require("inquirer");
 
+var counter = 0;
+var allCards = [];
+var basic = [];
+var clozed = [];
 
 function ClozeCard(text, cloze){
     this.text = text;
@@ -23,29 +27,25 @@ ClozeCard.prototype.fullText = function(){
 
 var firstPresident = new BasicCard("who was the first president of the United States", "George Washington");
 
-// "who was the first president of the United States"
-console.log(firstPresident.front);
-
-// "goerge washington"
-console.log(firstPresident.back);
-
 var firstPresidentCloze = new ClozeCard("George Washington was the first president of the United States.", "George Washington");
 
-console.log(firstPresidentCloze.cloze);
 firstPresidentCloze.partial();
 firstPresidentCloze.fullText();
 
 var brokenCloze = new ClozeCard("this does not work", "oops");
-console.log(brokenCloze.text + ", " + brokenCloze.cloze);
-
-
-module.exports = ClozeCard;
 
 inquire.prompt([
     {
-        type: "input",
-        name: "test",
-        message: "message test", 
-        choices: ["a", "b", "c"]
+        name: "name",
+        message: firstPresident.front
     }
-])
+]).then(function(answers){
+    if (answers.name === firstPresident.back || answers.name === firstPresident.back.toLowerCase()){
+        console.log("correct");
+    }
+    else {
+        console.log("incorrect");
+    }
+})
+
+module.exports = ClozeCard;
