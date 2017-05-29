@@ -7,11 +7,36 @@ function ClozeCard(text, cloze){
     this.cloze = cloze;
 }
 
-var washington = new BasicCard();
-washington.front = "question 1";
-washington.back = "answer 1";
+ClozeCard.prototype.partial = function(){
+    this.cloze = "... "
+    this.text = "was the first president of the United States."
+    console.log(this.cloze + this.text);
+};
 
-console.log(washington.front);
-console.log(washington.back);
+ClozeCard.prototype.fullText = function(){
+    this.cloze = "George Washington"
+    this.text = "was the first president of the United States."
+    console.log(this.cloze + " " + this.text);
+};
+
+
+
+var firstPresident = new BasicCard("who was the first president of the United States", "George Washington");
+
+// "who was the first president of the United States"
+console.log(firstPresident.front);
+
+// "goerge washington"
+console.log(firstPresident.back);
+
+var firstPresidentCloze = new ClozeCard("George Washington was the first president of the United States.", "George Washington");
+
+console.log(firstPresidentCloze.cloze);
+firstPresidentCloze.partial();
+firstPresidentCloze.fullText();
+
+var brokenCloze = new ClozeCard("this does not work", "oops");
+console.log(brokenCloze.text + ", " + brokenCloze.cloze);
+
 
 module.exports = ClozeCard;
