@@ -40,3 +40,12 @@ console.log(brokenCloze.text + ", " + brokenCloze.cloze);
 
 
 module.exports = ClozeCard;
+
+inquire.prompt([
+    {
+        type: "input",
+        name: "test",
+        message: "message test", 
+        choices: ["a", "b", "c"]
+    }
+])
