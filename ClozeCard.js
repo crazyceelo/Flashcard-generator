@@ -56,21 +56,28 @@ var brokenCloze = new ClozeCard("this does not work", "oops");
 
 var i = 0;
 function runBasic(){
-    if (basicArray.length < 3){
+    if (basicArray.length <= 2){
         inquire.prompt([
             {
                 name: "name",
                 message: basicArray[i].front
             }
         ]).then(function(answers){
-            i++;
-            console.log(i);
+            
+            // console.log(i);
             if (answers.name === basicArray[i].back || answers.name === basicArray[i].back.toLowerCase()){
                 console.log("correct");
-                
+                i++;
+                if (i === 2){
+                    return false;
+                }
             }
             else {
                 console.log("incorrect");
+                i++;
+                if (i === 2) {
+                    return false;
+                }
             }
             runBasic();
         })
